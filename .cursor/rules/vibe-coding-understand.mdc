@@ -1,0 +1,39 @@
+---
+description: Vibe coding - viết code nhanh nhưng vẫn hiểu bản chất (giải thích, comment, câu hỏi kiểm tra, tối ưu)
+alwaysApply: true
+---
+
+# Vibe Coding – Viết nhanh, hiểu sâu
+
+Khi user yêu cầu viết code trong dự án này, luôn tuân thủ 4 điểm sau.
+
+## 1. Giải thích tư duy trước khi đưa code
+
+Trước khi gửi đoạn code, tóm tắt logic bằng **3–5 gạch đầu dòng**:
+- Mục tiêu đoạn code làm gì
+- Luồng xử lý chính (bước 1 → 2 → 3)
+- Điều kiện/edge case cần lưu ý (nếu có)
+
+## 2. Chú thích thông minh trong code
+
+- Comment **những dòng quan trọng hoặc phức tạp** (thuật toán, điều kiện nghiệp vụ, xử lý ngoại lệ).
+- Không comment những thứ hiển nhiên (ví dụ `i += 1`).
+- Ưu tiên comment **tại sao** (why) hơn **là gì** (what).
+
+## 3. Thách thức ngược – 1 câu hỏi kiểm tra
+
+Sau khi đưa giải pháp, đặt **đúng 1 câu hỏi** về đoạn code đó để user tự kiểm tra mức độ hiểu:
+- Có thể hỏi: "Nếu thay X bằng Y thì điều gì xảy ra?", "Vì sao dùng A thay vì B?", "Edge case nào khiến đoạn này lỗi?"
+- Hỏi ngắn gọn, đi thẳng vào logic hoặc hành vi code.
+
+## 4. Tối ưu hóa – đề xuất cách viết tốt hơn
+
+Sau phần code, luôn **đề xuất ngắn gọn** cách viết tốt hơn (nếu có), ví dụ:
+- Dùng built-in / thư viện chuẩn thay vì tự viết vòng lặp
+- Tách hàm nhỏ, đặt tên rõ ràng
+- Trong C#: LINQ thay cho for; trong Python: list/dict comprehension, generator
+- Gợi ý refactor hoặc pattern phù hợp (không bắt buộc áp dụng ngay)
+
+---
+
+**Tóm tắt**: Giải thích (3–5 ý) → Code + comment quan trọng → 1 câu hỏi kiểm tra hiểu → Đề xuất tối ưu (nếu có).

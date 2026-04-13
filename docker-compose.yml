@@ -1,0 +1,60 @@
+services:
+  # 1. Database MySQL (Trái tim lưu trữ)
+  db:
+    image: mysql:8.0
+    container_name: youtube_db
+    restart: always
+    # Khai báo trực tiếp để MySQL không thể "cãi"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # 2. Image App (Để build script)
+  sentiment_analysis:
+    build: .
+    image: youtube-sentiment-app:latest
+    env_file: .env
+    volumes:
+      - .:/app
+
+  # 3. Airflow (Người điều phối)
+  airflow:
+    image: apache/airflow:2.7.1-python3.9
+    user: "root"
+    container_name: airflow_standalone
+    command: standalone
+    ports:
+      - "8080:8080"
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+      - ./.env:/opt/airflow/.env
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+    env_file: .env
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+
+  # 4. Metabase (Dashboard)
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    ports:
+      - "3000:3000"
+    restart: always
+    volumes:
+      - ./metabase-data:/metabase.db
+    environment:
+      - MB_DB_TYPE=h2
+      - MB_DB_FILE=/metabase.db
+
+# Ép Docker dùng đúng tên mạng mà script Airflow đang gọi
+networks:
+  default:
+    name: public-opinion-election-trend-prediction-system_default
+
+volumes:
+  mysql_data:
