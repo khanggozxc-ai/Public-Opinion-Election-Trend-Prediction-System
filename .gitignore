@@ -2,3 +2,7 @@ logs/
 .env
 db_data/
 __pycache__/
+
+metabase-data/
+archive/
+*.csv
