@@ -37,6 +37,10 @@ services:
     env_file: .env
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - _AIRFLOW_WWW_USER_CREATE=true
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=170426  
+      - _AIRFLOW_WWW_USER_ROLE=Admin
 
   # 4. Metabase (Dashboard)
   metabase:
@@ -54,7 +58,6 @@ services:
 # Ép Docker dùng đúng tên mạng mà script Airflow đang gọi
 networks:
   default:
-    name: public-opinion-election-trend-prediction-system_default
-
+    name: youtube_pipeline_network
 volumes:
   mysql_data:
