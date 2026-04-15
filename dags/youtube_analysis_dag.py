@@ -26,7 +26,7 @@ run_analysis = BashOperator(
     # Cập nhật lệnh chạy 3 bước liên hoàn
 bash_command = (
     'docker run --rm --env-file /opt/airflow/.env '
-    '--network public-opinion-election-trend-prediction-system_default '
+    '--network youtube_pipeline_network '
     '-e PYTHONUNBUFFERED=1 youtube-sentiment-app:latest '
     '/bin/bash -c "python scripts/youtube_comments.py && '
     'python scripts/sentiment_analysis.py && '

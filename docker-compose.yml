@@ -6,8 +6,9 @@ services:
     restart: always
     # Khai báo trực tiếp để MySQL không thể "cãi"
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     ports:
       - "3306:3306"
     volumes:
@@ -30,6 +31,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
+   
       - //var/run/docker.sock:/var/run/docker.sock
       - ./.env:/opt/airflow/.env
       - ./dags:/opt/airflow/dags
@@ -41,6 +43,7 @@ services:
       - _AIRFLOW_WWW_USER_USERNAME=admin
       - _AIRFLOW_WWW_USER_PASSWORD=170426  
       - _AIRFLOW_WWW_USER_ROLE=Admin
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
 
   # 4. Metabase (Dashboard)
   metabase:
@@ -54,6 +57,7 @@ services:
     environment:
       - MB_DB_TYPE=h2
       - MB_DB_FILE=/metabase.db
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
 
 # Ép Docker dùng đúng tên mạng mà script Airflow đang gọi
 networks:

@@ -45,6 +45,7 @@ DB_USER=root
 DB_PASSWORD=[Mật-Khẩu-Của-Khang]
 DB_NAME=youtube_insight_db
 Khởi chạy hệ thống với Docker:
+docker exec -u root -it airflow_standalone cat /opt/airflow/standalone_admin_password.txt
 
 Bash
 docker-compose up -d
